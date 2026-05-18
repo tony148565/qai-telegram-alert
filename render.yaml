@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: qai-telegram-alert
+    env: python
+    region: singapore  # 亚洲用户推荐
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 2 --threads 4 --timeout 60
+    envVars:
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: WEBHOOK_SECRET
+        sync: false
